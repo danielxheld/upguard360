@@ -73,38 +73,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                @if (session('certificate'))
-                                    <div class="certificate-info">
-                                        <h2>Certificate Information</h2>
-                                        <table>
-                                            <tr>
-                                                <th>Issuer</th>
-                                                <td>{{ session('certificate')['issuer']['CN'] }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Subject</th>
-                                                <td>{{ session('certificate')['subject']['CN'] }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Valid From</th>
-                                                <td>{{ session('certificate')['valid_from'] }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Valid To</th>
-                                                <td>{{ session('certificate')['valid_to'] }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Serial Number</th>
-                                                <td>{{ session('certificate')['serial_number'] }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Signature Algorithm</th>
-                                                <td>{{ session('certificate')['signature_algorithm'] }}</td>
-                                            </tr>
-                                            <!-- Add more details if needed -->
-                                        </table>
-                                    </div>
-                                @endif
 
                                 <!-- More people... -->
                                 </tbody>
@@ -115,11 +83,4 @@
             </div>
         </div>
     </div>
-    <form action="/check-certificate" method="post">
-        @csrf
-        <label for="url">URL:</label>
-        <input type="url" name="url" required>
-        <button type="submit">Check Certificate</button>
-    </form>
-
 </x-app-layout>

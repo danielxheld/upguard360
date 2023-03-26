@@ -64,7 +64,9 @@ class MonitorController extends Controller
     public function show($id)
     {
         $monitor = Monitor::find($id);
-        return view('monitors/show-monitor', ['monitor' => $monitor]);
+        $certificate_controller = new CertificateHealthMonitorController();
+        $certificate = $certificate_controller->checkCertificate($monitor->url_or_ip);
+        return view('monitors/show-monitor', ['monitor' => $monitor, 'certificate' => $certificate]);
     }
 
     public function delete($id)

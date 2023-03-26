@@ -33,7 +33,7 @@
                     </a>
                 </div>
             </div>
-            <div class="overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow mt-5">
+            <div class="overflow-hidden rounded-lg dark:bg-gray-800 dark:bg-gray-800 shadow mt-5">
                 <div class="px-4 py-3 sm:p-1">
                     <div id="chart"></div>
                 </div>
@@ -93,7 +93,7 @@
                     },
                     yaxis: {
                         min: 0,
-                        max: function(value) {
+                        max: function (value) {
                             // Wenn der größte Wert größer als 500 ist, wird er zurückgegeben, ansonsten 500
                             return value + 0.2;
                         },
@@ -108,13 +108,76 @@
                     }
                 };
 
-                document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('DOMContentLoaded', function () {
                     var chart = new ApexCharts(document.querySelector("#chart"), options);
                     chart.render();
                 });
             </script>
+            @if ($certificate['status'] === 'success')
+            <div class="overflow-hidden dark:bg-gray-800 dark:bg-gray-800 shadow sm:rounded-lg mt-6">
+                <div class="px-4 py-5 sm:px-6">
+                    <h3 class="text-base font-semibold leading-6 text-white">Certificate checks</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-400">Main certificate details</p>
+                </div>
+                <div class="border-t border-gray-700">
+                    <dl>
+                        <div class="dark:bg-gray-800 px-4 py-2 pt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Issuer</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['issuer'] }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Subject</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['subject'] }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Valid From</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['valid_from'] }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Valid To</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['valid_to'] }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Days Remaining</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['days_remaining'] }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Lifetime</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['lifetime'] }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Serial Number</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['serial_number'] }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Signature Algorithm</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['signature_algorithm'] }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Is Self-Signed</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['is_self_signed'] ? 'Yes' : 'No' }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Is SHA1</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">{{ $certificate['certificate']['is_sha1'] ? 'Yes' : 'No' }}</dd>
+                        </div>
+                        <div class="dark:bg-gray-800 px-4 py-2 pb-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-400"><b>Valid for Domains</b></dt>
+                            <dd class="mt-1 text-sm text-gray-400 sm:col-span-2 sm:mt-0">
+                                <ul class="list-disc ml-4">
+                                    @foreach ($certificate['certificate']['domains'] as $domain)
+                                        <li>{{ $domain }}</li>
+                                    @endforeach
+                                </ul>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
+
     <script>
         const typeSelect = document.getElementById("type");
         const portDiv = document.getElementById("portDiv");
@@ -177,7 +240,7 @@
                 <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                     <x-danger-button :slot="'Delete'"/>
                     <button onclick="document.getElementById('deleteMonitorModal').style.display='none';" type="button"
-                            class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">
+                            class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">
                         Cancel
                     </button>
                 </div>

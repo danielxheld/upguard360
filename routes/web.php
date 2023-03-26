@@ -31,6 +31,4 @@ Route::middleware([
     Route::post('/monitors/new', [ MonitorController::class, 'store' ])->name('monitors.new');
     Route::get('/monitors/show/{ID}', [ MonitorController::class, 'show' ])->name('monitors.show');
     Route::delete('/monitors/delete/{id}', [MonitorController::class, 'delete'])->name('monitors.delete');
-    Route::post('/crawl', [CrawlerController::class, 'crawl'])->name('crawl');
-    Route::post('/check-certificate', [CertificateHealthMonitorController::class, 'checkCertificate']);
 });

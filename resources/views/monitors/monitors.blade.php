@@ -35,11 +35,11 @@
                                         Status
                                     </th>
                                     <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white hidden md:block">
                                         URL (or IP)
                                     </th>
                                     <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white hidden lg:block">
                                         Monitoring Interval
                                     </th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -61,8 +61,8 @@
                                                     class="inline-flex rounded-full bg-red-500 px-2 text-xs font-semibold leading-5 text-white">Down</span>
                                             @endif
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">{{ $monitor->url_or_ip }}</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">{{ ucfirst(strtolower(implode(' ', preg_split('/(?=[A-Z])/', $monitor->interval)))) }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400 hidden md:block">{{ $monitor->url_or_ip }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400 hidden lg:block">{{ ucfirst(strtolower(implode(' ', preg_split('/(?=[A-Z])/', $monitor->interval)))) }}</td>
                                         <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
                                             <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                                  aria-hidden="true">

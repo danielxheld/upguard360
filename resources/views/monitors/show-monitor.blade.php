@@ -14,9 +14,9 @@
         </div>
     @endif
 
-    <div class="py-12">
+    <div class="py-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="sm:flex sm:items-center">
+            <div class="sm:flex sm:items-center px-4 sm:px-0">
                 <div class="sm:flex-auto">
                     <h2 class="mt-2 text-white">Current Status: <span class="text-green-600 font-semibold">Up</span>
                     </h2>
@@ -33,7 +33,7 @@
                     </a>
                 </div>
             </div>
-            <div class="overflow-hidden rounded-lg dark:bg-gray-800 dark:bg-gray-800 shadow mt-5">
+            <div class="overflow-hidden dark:bg-gray-800 dark:bg-gray-800 shadow sm:rounded-lg mt-6">
                 <div class="px-4 py-3 sm:p-1">
                     <div id="chart"></div>
                 </div>

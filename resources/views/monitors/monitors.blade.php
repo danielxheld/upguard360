@@ -8,7 +8,7 @@
 
     <div class="py-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="sm:flex sm:items-center">
+            <div class="sm:flex sm:items-center px-4 sm:px-0">
                 <div class="sm:flex-auto">
                     <h1 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">Users</h1>
                     <p class="mt-2 text-sm text-gray-700 dark:text-gray-400">A list of all the users in your account
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="mt-8 flow-root">
-                <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="-my-2 md:-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                         <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-700">
@@ -35,11 +35,11 @@
                                         Status
                                     </th>
                                     <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white hidden md:block">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white hidden sm:table-cell">
                                         URL (or IP)
                                     </th>
                                     <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white hidden lg:block">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white hidden md:table-cell">
                                         Monitoring Interval
                                     </th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -61,8 +61,8 @@
                                                     class="inline-flex rounded-full bg-red-500 px-2 text-xs font-semibold leading-5 text-white">Down</span>
                                             @endif
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400 hidden md:block">{{ $monitor->url_or_ip }}</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400 hidden lg:block">{{ ucfirst(strtolower(implode(' ', preg_split('/(?=[A-Z])/', $monitor->interval)))) }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400 hidden sm:table-cell">{{ $monitor->url_or_ip }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400 hidden md:table-cell">{{ ucfirst(strtolower(implode(' ', preg_split('/(?=[A-Z])/', $monitor->interval)))) }}</td>
                                         <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium">
                                             <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                                  aria-hidden="true">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProcessMonitorCheck;
 use App\Models\Monitor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,17 +39,24 @@ class MonitorController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
-            'type' => 'required',
             'url_or_ip' => 'required',
             'port' => 'required',
+            'interval' => 'required',
+            'timeout' => 'required',
         ], [
             'title.required' => 'Title field is required.',
-            'type.required' => 'Type field is required.',
             'url_or_ip.required' => 'URL or IP field is required.',
             'port.required' => 'Port field is required.',
+            'interval.required' => 'Interval field is required.',
+            'timeout.required' => 'Timeout field is required.',
         ]);
 
+        $notifyByMail = $request->input('notify_by_mail');
+
+        $validatedData['notify_by_mail'] = $notifyByMail === 'on';
+
         $monitor = Monitor::create($validatedData);
+        ProcessMonitorCheck::dispatch($monitor);
         return redirect()->route('monitors.show', $monitor->id)->with('success', 'Monitor created successfully.');
     }
 
@@ -67,6 +75,10 @@ class MonitorController extends Controller
         }
         $monitor->delete();
         return redirect()->route('monitors.index')->with('success', 'Monitor deleted successfully.');
+    }
+
+    public function test() {
+
     }
 
 

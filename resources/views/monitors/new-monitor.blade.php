@@ -59,12 +59,26 @@
                             </div>
 
                             <div class="col-span-6">
-                                <label class="block text-sm font-medium text-gray-400">Interval - <span
-                                        id="amountInput">10</span> Minute(n)</label>
-                                <input id="minmax-range" type="range" min="1" max="100" value="10"
-                                       class="w-full h-3 bg-gray-900 accent-cyan-600 rounded-lg appearance-none cursor-pointer range-lg mt-2"
-                                       oninput="document.getElementById('amountInput').innerHTML=this.value"
-                                       name="interval" required>
+                                <label for="interval" class="block text-sm font-medium text-gray-400">Interval</label>
+                                <select id="interval" name="interval"
+                                        class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-cyan-500 dark:focus:border-cyan-600 focus:ring-cyan-500 dark:focus:ring-cyan-600 rounded-md shadow-sm mt-1 block w-full">
+                                    <option value="everyMinute">Every minute</option>
+                                    <option value="everyTwoMinutes">Every two minutes</option>
+                                    <option value="everyThreeMinutes">Every three minutes</option>
+                                    <option value="everyFourMinutes">Every four minutes</option>
+                                    <option value="everyFiveMinutes">Every five minutes</option>
+                                    <option value="everyTenMinutes">Every ten minutes</option>
+                                    <option value="everyFifteenMinutes">Every fifteen minutes</option>
+                                    <option value="everyThirtyMinutes">Every thirty minutes</option>
+                                    <option value="hourly">Hourly</option>
+                                    <option value="everyTwoHours">Every two hours</option>
+                                    <option value="everyThreeHours">Every three hours</option>
+                                    <option value="everyFourHours">Every four hours</option>
+                                    <option value="everySixHours">Every six hours</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                </select>
                             </div>
 
                             <div class="col-span-6">
@@ -90,7 +104,7 @@
                                 <div class="mt-4 space-y-4">
                                     <div class="flex items-start">
                                         <div class="flex h-5 items-center">
-                                            <input id="notifyByMail" name="notifyByMail" type="checkbox"
+                                            <input id="notify_by_mail" name="notify_by_mail" type="checkbox"
                                                    class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-cyan-600 shadow-sm focus:ring-cyan-500 dark:focus:ring-cyan-600 dark:focus:ring-offset-gray-800">
                                         </div>
                                         <div class="ml-3 text-sm">

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CertificateHealthMonitorController;
+use App\Http\Controllers\CrawlerController;
 use App\Http\Controllers\MonitorController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +31,6 @@ Route::middleware([
     Route::post('/monitors/new', [ MonitorController::class, 'store' ])->name('monitors.new');
     Route::get('/monitors/show/{ID}', [ MonitorController::class, 'show' ])->name('monitors.show');
     Route::delete('/monitors/delete/{id}', [MonitorController::class, 'delete'])->name('monitors.delete');
-
+    Route::post('/crawl', [CrawlerController::class, 'crawl'])->name('crawl');
+    Route::post('/check-certificate', [CertificateHealthMonitorController::class, 'checkCertificate']);
 });

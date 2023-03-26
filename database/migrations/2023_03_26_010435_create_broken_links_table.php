@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('monitors', function (Blueprint $table) {
+        Schema::create('broken_links', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('url_or_ip');
-            $table->integer('port');
-            $table->string('interval');
-            $table->integer('timeout');
-            $table->boolean('notify_by_mail')->default(false);
-            $table->boolean('status')->default(false);
+            $table->string('url');
             $table->timestamps();
+            $table->unsignedBigInteger('monitor_id');
+            $table->foreign('monitor_id')->references('id')->on('monitors')->onDelete('cascade');
         });
     }
 
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('monitors');
+        Schema::dropIfExists('broken_links');
     }
 };

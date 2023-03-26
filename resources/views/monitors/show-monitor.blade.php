@@ -7,7 +7,7 @@
 
     @if(Session::has('success'))
         <div class="alert alert-success">
-            <livewire:success-notification :message="session('success')" />
+            <livewire:success-notification :message="session('success')"/>
             @php
                 Session::forget('success');
             @endphp
@@ -18,7 +18,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
-                    <h2 class="mt-2 text-gray-700">Current Status:<span class="text-green-600 font-semibold">Up</span></h2>
+                    <h2 class="mt-2 text-white">Current Status: <span class="text-green-600 font-semibold">Up</span>
+                    </h2>
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                     <a href="{$EditLink}"
@@ -32,6 +33,86 @@
                     </a>
                 </div>
             </div>
+            <div class="overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow mt-5">
+                <div class="px-4 py-3 sm:p-1">
+                    <div id="chart"></div>
+                </div>
+            </div>
+            <script>
+                var chartData = [];
+                var dateData = [];
+
+                var chartData = {!! json_encode($monitor->logs->pluck('ttfb')) !!};
+                var dateData = {!! json_encode($monitor->logs->pluck('created_at')->map(function ($date) { return strtotime($date) * 1000; })) !!};
+
+                var options = {
+                    chart: {
+                        type: 'area',
+                        toolbar: {show: false},
+                        height: "300px",
+                        sparkline: {
+                            enabled: false // Größe des Diagramms erhöhen
+                        }
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        width: 0.5,
+                    },
+                    grid: {
+                        borderColor: '#374151', // Farbe der Linien
+                    },
+                    series: [{
+                        name: 'Milliseconds',
+                        data: chartData,
+                        color: "#0891B2"
+                    }],
+                    fill: {
+                        type: 'solid',
+                        color: "#0891B2",
+                        opacity: 0.2
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    labels: dateData,
+                    xaxis: {
+                        type: 'datetime',
+                        labels: {
+                            datetimeFormatter: {
+                                hour: 'HH:mm',
+                            },
+                            style: {
+                                colors: '#FFFFFF' // Schriftfarbe auf weiß setzen
+                            }
+                        },
+                    },
+                    tooltip: {
+                        x: {
+                            format: 'dd MMM - HH:mm' // oder jedes andere Datumsformat, das Sie bevorzugen
+                        }
+                    },
+                    yaxis: {
+                        min: 0,
+                        max: function(value) {
+                            // Wenn der größte Wert größer als 500 ist, wird er zurückgegeben, ansonsten 500
+                            return value + 0.2;
+                        },
+                        labels: {
+                            formatter: function (value) {
+                                return value.toFixed(3);
+                            },
+                            style: {
+                                colors: '#FFFFFF' // Schriftfarbe auf weiß setzen
+                            }
+                        }
+                    }
+                };
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    var chart = new ApexCharts(document.querySelector("#chart"), options);
+                    chart.render();
+                });
+            </script>
         </div>
     </div>
     <script>
@@ -94,7 +175,7 @@
                     </div>
                 </div>
                 <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                    <x-danger-button :slot="'Delete'" />
+                    <x-danger-button :slot="'Delete'"/>
                     <button onclick="document.getElementById('deleteMonitorModal').style.display='none';" type="button"
                             class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">
                         Cancel

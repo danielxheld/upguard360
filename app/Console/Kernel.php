@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Jobs\ProcessMonitorCheck;
+use App\Models\Monitor;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +14,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $monitors = Monitor::all();
+        foreach ($monitors as $monitor) {
+            $interval = $monitor->interval;
+            $schedule->job(new ProcessMonitorCheck($monitor))->$interval();
+        }
     }
 
     /**
@@ -24,4 +30,6 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
+
 }
